@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D3DA65341CE1BA6B00426BED /* SSBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DA65331CE1BA6B00426BED /* SSBaseView.m */; };
+		D3DA65371CE1BABF00426BED /* SSSystemAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DA65361CE1BABF00426BED /* SSSystemAlertView.m */; };
+		D3DA653A1CE1BAD600426BED /* SSSystemActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DA65391CE1BAD600426BED /* SSSystemActionSheet.m */; };
+		D3DA653D1CE1BAEF00426BED /* SSToastView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DA653C1CE1BAEF00426BED /* SSToastView.m */; };
+		D3DA65401CE1BB1E00426BED /* SSCustomAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DA653F1CE1BB1E00426BED /* SSCustomAlertView.m */; };
+		D3DA65431CE1BB4300426BED /* SSCustomActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DA65421CE1BB4300426BED /* SSCustomActionSheet.m */; };
+		D3DA65461CE1C60100426BED /* SSLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DA65451CE1C60100426BED /* SSLoadingView.m */; };
+		D3DA65491CE1C61B00426BED /* SSProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DA65481CE1C61B00426BED /* SSProgressView.m */; };
+		D3DA654C1CE1C66300426BED /* SlatherShow.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DA654B1CE1C66300426BED /* SlatherShow.m */; };
 		D3E193611CD8BF8C00A88A99 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D3E193601CD8BF8C00A88A99 /* main.m */; };
 		D3E193641CD8BF8C00A88A99 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D3E193631CD8BF8C00A88A99 /* AppDelegate.m */; };
 		D3E193671CD8BF8C00A88A99 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3E193661CD8BF8C00A88A99 /* ViewController.m */; };
@@ -35,6 +44,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D3DA65321CE1BA6B00426BED /* SSBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSBaseView.h; sourceTree = "<group>"; };
+		D3DA65331CE1BA6B00426BED /* SSBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSBaseView.m; sourceTree = "<group>"; };
+		D3DA65351CE1BABF00426BED /* SSSystemAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSSystemAlertView.h; sourceTree = "<group>"; };
+		D3DA65361CE1BABF00426BED /* SSSystemAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSSystemAlertView.m; sourceTree = "<group>"; };
+		D3DA65381CE1BAD600426BED /* SSSystemActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSSystemActionSheet.h; sourceTree = "<group>"; };
+		D3DA65391CE1BAD600426BED /* SSSystemActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSSystemActionSheet.m; sourceTree = "<group>"; };
+		D3DA653B1CE1BAEF00426BED /* SSToastView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSToastView.h; sourceTree = "<group>"; };
+		D3DA653C1CE1BAEF00426BED /* SSToastView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSToastView.m; sourceTree = "<group>"; };
+		D3DA653E1CE1BB1E00426BED /* SSCustomAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCustomAlertView.h; sourceTree = "<group>"; };
+		D3DA653F1CE1BB1E00426BED /* SSCustomAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCustomAlertView.m; sourceTree = "<group>"; };
+		D3DA65411CE1BB4300426BED /* SSCustomActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCustomActionSheet.h; sourceTree = "<group>"; };
+		D3DA65421CE1BB4300426BED /* SSCustomActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCustomActionSheet.m; sourceTree = "<group>"; };
+		D3DA65441CE1C60100426BED /* SSLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSLoadingView.h; sourceTree = "<group>"; };
+		D3DA65451CE1C60100426BED /* SSLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSLoadingView.m; sourceTree = "<group>"; };
+		D3DA65471CE1C61B00426BED /* SSProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSProgressView.h; sourceTree = "<group>"; };
+		D3DA65481CE1C61B00426BED /* SSProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSProgressView.m; sourceTree = "<group>"; };
+		D3DA654A1CE1C66300426BED /* SlatherShow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlatherShow.h; sourceTree = "<group>"; };
+		D3DA654B1CE1C66300426BED /* SlatherShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlatherShow.m; sourceTree = "<group>"; };
 		D3E1935C1CD8BF8B00A88A99 /* SlatherShow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SlatherShow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3E193601CD8BF8C00A88A99 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D3E193621CD8BF8C00A88A99 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -105,6 +132,24 @@
 				D3E193631CD8BF8C00A88A99 /* AppDelegate.m */,
 				D3E193651CD8BF8C00A88A99 /* ViewController.h */,
 				D3E193661CD8BF8C00A88A99 /* ViewController.m */,
+				D3DA65321CE1BA6B00426BED /* SSBaseView.h */,
+				D3DA65331CE1BA6B00426BED /* SSBaseView.m */,
+				D3DA65351CE1BABF00426BED /* SSSystemAlertView.h */,
+				D3DA65361CE1BABF00426BED /* SSSystemAlertView.m */,
+				D3DA65381CE1BAD600426BED /* SSSystemActionSheet.h */,
+				D3DA65391CE1BAD600426BED /* SSSystemActionSheet.m */,
+				D3DA653E1CE1BB1E00426BED /* SSCustomAlertView.h */,
+				D3DA653F1CE1BB1E00426BED /* SSCustomAlertView.m */,
+				D3DA65411CE1BB4300426BED /* SSCustomActionSheet.h */,
+				D3DA65421CE1BB4300426BED /* SSCustomActionSheet.m */,
+				D3DA653B1CE1BAEF00426BED /* SSToastView.h */,
+				D3DA653C1CE1BAEF00426BED /* SSToastView.m */,
+				D3DA65441CE1C60100426BED /* SSLoadingView.h */,
+				D3DA65451CE1C60100426BED /* SSLoadingView.m */,
+				D3DA65471CE1C61B00426BED /* SSProgressView.h */,
+				D3DA65481CE1C61B00426BED /* SSProgressView.m */,
+				D3DA654A1CE1C66300426BED /* SlatherShow.h */,
+				D3DA654B1CE1C66300426BED /* SlatherShow.m */,
 				D3E193681CD8BF8C00A88A99 /* Main.storyboard */,
 				D3E1936B1CD8BF8C00A88A99 /* Assets.xcassets */,
 				D3E1936D1CD8BF8C00A88A99 /* LaunchScreen.storyboard */,
@@ -272,7 +317,16 @@
 			files = (
 				D3E193671CD8BF8C00A88A99 /* ViewController.m in Sources */,
 				D3E193641CD8BF8C00A88A99 /* AppDelegate.m in Sources */,
+				D3DA65371CE1BABF00426BED /* SSSystemAlertView.m in Sources */,
+				D3DA65401CE1BB1E00426BED /* SSCustomAlertView.m in Sources */,
+				D3DA65431CE1BB4300426BED /* SSCustomActionSheet.m in Sources */,
+				D3DA65491CE1C61B00426BED /* SSProgressView.m in Sources */,
+				D3DA653A1CE1BAD600426BED /* SSSystemActionSheet.m in Sources */,
+				D3DA653D1CE1BAEF00426BED /* SSToastView.m in Sources */,
+				D3DA654C1CE1C66300426BED /* SlatherShow.m in Sources */,
 				D3E193611CD8BF8C00A88A99 /* main.m in Sources */,
+				D3DA65461CE1C60100426BED /* SSLoadingView.m in Sources */,
+				D3DA65341CE1BA6B00426BED /* SSBaseView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,6 +470,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SlatherShow/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.youzan.SlatherShow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -427,6 +482,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SlatherShow/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.youzan.SlatherShow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -498,6 +554,7 @@
 				D3E1938B1CD8BF8C00A88A99 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D3E1938C1CD8BF8C00A88A99 /* Build configuration list for PBXNativeTarget "SlatherShowTests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +563,7 @@
 				D3E1938E1CD8BF8C00A88A99 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D3E1938F1CD8BF8C00A88A99 /* Build configuration list for PBXNativeTarget "SlatherShowUITests" */ = {
 			isa = XCConfigurationList;
@@ -514,6 +572,7 @@
 				D3E193911CD8BF8C00A88A99 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
