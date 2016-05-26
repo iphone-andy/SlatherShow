@@ -298,6 +298,7 @@ static const char SSSystemAlertView_ClassMethodActionBlockIdentify;
 #pragma mark - Show / Dismiss action
 
 - (void)show{
+    NSAssert(!_yzAlert, @"you may use chain grammar to init alert , you should use ss_show to show alert");
     dispatch_async(dispatch_get_main_queue(), ^{
         if (IOS8Later) {
             if(_yzAlert){
@@ -433,6 +434,12 @@ static const char SSSystemAlertView_ClassMethodActionBlockIdentify;
         [[SSSystemAlertView shareInstance] addCancelButtonWithTitle:cancle actionHandler:block];
         [[SSSystemAlertView shareInstance] show];
         return [SSSystemAlertView shareInstance];
+    };
+}
+
+- (void(^)(void))ss_dismiss{
+    return ^(){
+        [[SSSystemAlertView shareInstance] dismiss];
     };
 }
 
