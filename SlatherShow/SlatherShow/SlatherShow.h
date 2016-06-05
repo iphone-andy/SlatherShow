@@ -22,12 +22,8 @@ typedef NS_ENUM(NSUInteger, SlatherShowType) {
 
 @interface SlatherShow : NSObject
 
-//@property(nonatomic, readonly, copy) SlatherShow *(^make)(SlatherShowType *type);
++ (SSSystemAlertView *(^)(void))makeSysAlert;
 
-+ (SSSystemAlertView *(^)(SlatherShowType type))make;
-
-//+ (SSSystemAlertView *)systemAlert;
-
-//- (SSSystemAlertView *)systemAlert;
++ (SSCustomAlertView *(^)(void))makeCusAlert;
 
 @end

@@ -23,13 +23,79 @@ typedef void (^CustomAlertClickBlock)(SSCustomAlertView *alertView, NSInteger bu
 @property(nonatomic, strong) NSString *message;
 @property(nonatomic, strong) NSAttributedString *attributeMessage;
 @property(nonatomic, assign) BOOL buttonsShouldStack; //按钮是否列表显示(只有两个按钮的时候)
-@property(nonatomic, copy) CustomAlertClickBlock clickBlock;
+@property(nonatomic, copy) CustomAlertClickBlock clickBlock; //按钮点击触发事件
 
+/**
+ *  初始化 不带clickBlock，所以初始化完以后需要另外赋值clickBlock属性
+ *
+ *  @param title             title
+ *  @param message           message
+ *  @param cancelButtonTitle cancelButtonTitle
+ *  @param otherButtons      otherButtons
+ *
+ *  @return SSCustomAlertView
+ */
+- (instancetype)initWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSArray *)otherButtons;
+/**
+ *  初始化
+ *
+ *  @param title             title
+ *  @param message           message
+ *  @param clickBlock        clickBlock 按钮点击回调
+ *  @param cancelButtonTitle cancelButtonTitle
+ *  @param otherButtons      otherButtons
+ *
+ *  @return SSCustomAlertView
+ */
 - (instancetype)initWithTitle:(NSString *)title message:(NSString *)message clickBlock:(CustomAlertClickBlock)clickBlock cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSArray *)otherButtons;
-- (NSString *)buttonTitleAtIndex:(NSInteger)buttonIndex;
+/**
+ *  添加按钮
+ *
+ *  @param title title
+ *
+ *  @return index
+ */
 - (NSInteger)addButtonWithTitle:(NSString *)title;
+/**
+ *  添加自定义的view  eg.textfield
+ *
+ *  @param customView view
+ */
 - (void)addCustomView:(UIView *)customView;
+/**
+ *  show
+ */
 - (void)show;
+/**
+ *  dismiss
+ */
 - (void)dismiss;
+
+#pragma mark - chainable alert
+
++ (SSCustomAlertView *)shareInstance;
+
+- (SSCustomAlertView *(^)(void))ss_alertInit;
+
+- (SSCustomAlertView *(^)(NSString *title))ss_title;
+
+- (SSCustomAlertView *(^)(NSAttributedString *attributedTitle))ss_attributedTitle;
+
+- (SSCustomAlertView *(^)(NSString *message))ss_message;
+
+- (SSCustomAlertView *(^)(NSAttributedString *attributedMessage))ss_attributedMessage;
+
+- (SSCustomAlertView *(^)(NSString *cancleTitle))ss_cancleTitle;
+
+- (SSCustomAlertView *(^)(NSArray *actionTitle))ss_actionTitle;
+
+- (SSCustomAlertView *(^)(CustomAlertClickBlock))ss_actionHandle;
+
+- (SSCustomAlertView *(^)(UIView *customView))ss_addCustomView;
+
+- (SSCustomAlertView *(^)(void))ss_show;
+
+- (void(^)(void))ss_dismiss;
+
 
 @end

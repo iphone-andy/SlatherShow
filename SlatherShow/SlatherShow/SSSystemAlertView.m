@@ -44,6 +44,7 @@ static const char SSSystemAlertView_ClassMethodActionBlockIdentify;
     });
     return alert;
 }
+
 #pragma mark - Class AlertView show
 
 + (SSSystemAlertView *)showAlertViewWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSArray *)otherButtonTitles handler:(AlertClickBlock)block;
@@ -555,4 +556,5 @@ static const char SSSystemAlertView_ClassMethodActionBlockIdentify;
     if (block)
         [self.alertSettingsDic setObject:block forKey:[NSString stringWithFormat:@"ss_actionHandle_index_%li",index]];
 }
+
 @end

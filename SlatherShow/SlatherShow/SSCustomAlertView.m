@@ -39,6 +39,21 @@
 
 #pragma mark - init
 
++ (SSCustomAlertView *)shareInstance{
+    static SSCustomAlertView *alert;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        alert = [[self alloc] init];
+    });
+    return alert;
+}
+
+- (instancetype)initWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSArray *)otherButtons
+{
+    return [self initWithTitle:title message:message clickBlock:nil cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtons];
+
+}
+
 - (instancetype)initWithTitle:(NSString *)title message:(NSString *)message clickBlock:(CustomAlertClickBlock)clickBlock cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSArray *)otherButtons
 {
     self = [super init];
@@ -291,16 +306,10 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[[UIApplication sharedApplication] delegate] window].frame];
     self.window.tintColor = self.tintColor;
-    
     UIViewController *viewController = [[UIViewController alloc] init];
-//    viewController.alertView = self;
     viewController.view = self.alertContainerView;
-    
     self.window.rootViewController = viewController;
-    
-    // Without this, the alert background will appear black on rotation
     self.window.backgroundColor = [UIColor clearColor];
-    // Same window level as regular alert views (above main window and status bar)
     self.window.windowLevel = UIWindowLevelAlert;
     self.window.hidden = NO;
     
@@ -363,11 +372,7 @@
         self.toolbar.layer.opacity = 1.0;
         self.contentView.layer.opacity = 1.0;
         
-        // Fade in the gray background
         [self.backgroundView.layer addAnimation:opacityAnimation forKey:@"opacity"];
-        
-        // Fade in the modal
-        // Would love to fade in all these things at once, but UIToolbar doesn't like it
         [self.toolbar.layer addAnimation:opacityAnimation forKey:@"opacity"];
         [self.contentView.layer addAnimation:opacityAnimation forKey:@"opacity"];
     } [CATransaction commit];
@@ -389,7 +394,6 @@
         [transformAnimation setValue:@"dismiss" forKey:@"transformKEY"];
         self.representationView.layer.transform = transformTo;
         
-        // Zoom out the modal
         [self.representationView.layer addAnimation:transformAnimation forKey:@"transform"];
         
         CASpringAnimation *opacityAnimation = [CASpringAnimation animationWithKeyPath:@"opacity"];
@@ -404,10 +408,7 @@
         self.backgroundView.layer.opacity = 0.0;
         self.toolbar.layer.opacity = 0.0;
         self.contentView.layer.opacity = 0.0;
-        // Fade out the gray background
         [self.backgroundView.layer addAnimation:opacityAnimation forKey:@"opacity"];
-        // Fade out the modal
-        // Would love to fade out all these things at once, but UIToolbar doesn't like it
         [self.toolbar.layer addAnimation:opacityAnimation forKey:@"opacity"];
         [self.contentView.layer addAnimation:opacityAnimation forKey:@"opacity"];
     } [CATransaction commit];
@@ -458,9 +459,7 @@
         labelText = self.hasCancleButton ? self.cancelButtonTitle : self.otherButtonsTitles[0];
         boldButton = YES;
         lastRow = YES;
-    }
-    // Side by side buttons
-    else if (self.numberOfButtons == 2) {
+    }else if (self.numberOfButtons == 2) {
         buttonIndex = tableView.tag;
         if (self.hasCancleButton) {
             if (buttonIndex == 1) {
@@ -528,12 +527,10 @@
 {
     if (self.numberOfButtons <= 2) {
         return 1;
-    }
-    else {
+    }else {
         if (tableView.tag == 0) {
             return [self.otherButtonsTitles count];
-        }
-        else {
+        }else {
             return 1;
         }
     }
@@ -570,12 +567,10 @@
     if (self.cancelButtonTitle) {
         if (buttonIndex == self.numberOfButtons - 1) {
             buttonTitle = self.cancelButtonTitle;
-        }
-        else {
+        }else {
             buttonTitle = [self.otherButtonsTitles objectAtIndex:buttonIndex];
         }
-    }
-    else {
+    }else {
         buttonTitle = [self.otherButtonsTitles objectAtIndex:buttonIndex];
     }
     return buttonTitle;
@@ -590,8 +585,6 @@
         [self.customViewArray addObject:customView];
     }
     [self setupWithTitle:self.title message:self.message cancelButtonTitle:self.cancelButtonTitle otherButtonTitles:self.otherButtonsTitles];
-
-//    [self setupWithSize:CGSizeMake(kAlertWidth, self.representationView.frame.size.height + customView.frame.size.height)];
 }
 
 - (void)dealloc
@@ -599,6 +592,94 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIKeyboardWillShowNotification
                                                   object:nil];
+}
+
+#pragma mark - chainable alert
+
+- (SSCustomAlertView *(^)(void))ss_alertInit{
+    return ^(){
+        return [SSCustomAlertView shareInstance];
+    };
+}
+
+- (SSCustomAlertView *(^)(void))ss_show
+{
+    return ^(){
+       SSCustomAlertView *alert = [[SSCustomAlertView shareInstance] initWithTitle:[SSCustomAlertView shareInstance].title message:[SSCustomAlertView shareInstance].message clickBlock:[SSCustomAlertView shareInstance].clickBlock cancelButtonTitle:[SSCustomAlertView shareInstance].cancelButtonTitle otherButtonTitles:[SSCustomAlertView shareInstance].otherButtonsTitles];
+        [alert show];
+        return [SSCustomAlertView shareInstance];
+    };
+}
+
+- (void(^)(void))ss_dismiss{
+    return ^(){
+        [[SSCustomAlertView shareInstance] dismissAlertAnimation];
+    };
+}
+
+- (SSCustomAlertView *(^)(NSString *title))ss_title{
+    return ^(NSString *title){
+        [SSCustomAlertView shareInstance].title = title;
+        return [SSCustomAlertView shareInstance];
+    };
+}
+
+- (SSCustomAlertView *(^)(NSString *message))ss_message
+{
+    return ^(NSString *message){
+        [SSCustomAlertView shareInstance].message = message;
+        return [SSCustomAlertView shareInstance];
+    };
+}
+
+- (SSCustomAlertView *(^)(NSAttributedString *attributedTitle))ss_attributedTitle
+{
+    return ^(NSAttributedString *attributedTitle){
+        [SSCustomAlertView shareInstance].attributeTitle = attributedTitle;
+        return [SSCustomAlertView shareInstance];
+    };
+}
+
+- (SSCustomAlertView *(^)(NSAttributedString *attributedMessage))ss_attributedMessage
+{
+    return ^(NSAttributedString *attributedMessage){
+        [SSCustomAlertView shareInstance].attributeMessage = attributedMessage;
+        return [SSCustomAlertView shareInstance];
+    };
+}
+
+- (SSCustomAlertView *(^)(NSString *cancleTitle))ss_cancleTitle
+{
+    return ^(NSString *cancleTitle){
+        [SSCustomAlertView shareInstance].cancelButtonTitle = cancleTitle;
+        return [SSCustomAlertView shareInstance];
+    };
+}
+
+- (SSCustomAlertView *(^)(NSArray *actionTitle))ss_actionTitle
+{
+    return ^(NSArray <NSString *>*actionTitle){
+        [SSCustomAlertView shareInstance].otherButtonsTitles = [NSMutableArray arrayWithArray:actionTitle];
+        return [SSCustomAlertView shareInstance];
+    };
+}
+
+- (SSCustomAlertView *(^)(UIView *customView))ss_addCustomView;
+{
+    return ^(UIView *customView){
+        if (![SSCustomAlertView shareInstance].customViewArray) {
+            [SSCustomAlertView shareInstance].customViewArray = [NSMutableArray array];
+        }
+        [[SSCustomAlertView shareInstance].customViewArray addObject:customView];
+        return [SSCustomAlertView shareInstance];
+    };
+}
+
+- (SSCustomAlertView *(^)(CustomAlertClickBlock))ss_actionHandle{
+    return ^(CustomAlertClickBlock clickblock){
+        [SSCustomAlertView shareInstance].clickBlock = [clickblock copy];
+        return [SSCustomAlertView shareInstance];
+    };
 }
 
 @end

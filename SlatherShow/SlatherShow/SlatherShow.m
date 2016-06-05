@@ -8,38 +8,25 @@
 
 #import "SlatherShow.h"
 
-
-
 @interface SlatherShow()
-
-//@property (nonatomic , strong , readwrite) SSSystemAlertView *systemAlert;
-
 
 @end
 
 @implementation SlatherShow
 
-+ (SSSystemAlertView *(^)(SlatherShowType type))make{
-
-    return ^(SlatherShowType type){
-        switch (type) {
-            case SSSystemAlertType:
-                [SSSystemAlertView shareInstance].ss_alertInit();
-                return [SSSystemAlertView shareInstance];
-                break;
-                
-            default:
-                return [SSSystemAlertView shareInstance];
-                break;
-        }
++ (SSSystemAlertView *(^)(void))makeSysAlert{
+    
+    return ^(void){
+        [SSSystemAlertView shareInstance].ss_alertInit();
+        return [SSSystemAlertView shareInstance];
     };
 }
-
-//+ (SSSystemAlertView *)systemAlert
-//{
-//
-//    return [[SSSystemAlertView alloc] init];
-//}
-
++ (SSCustomAlertView *(^)(void))makeCusAlert{
+    
+    return ^(){
+        [SSCustomAlertView shareInstance].ss_alertInit();
+        return [SSCustomAlertView shareInstance];
+    };
+}
 
 @end

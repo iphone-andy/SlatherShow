@@ -53,7 +53,8 @@
 - (IBAction)alertAction:(UIButton *)sender {
     
     NSAttributedString *att = [[NSAttributedString alloc] initWithString:@"hello erasds sdsd asds sdsds sd " attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:20.0],NSForegroundColorAttributeName : [UIColor redColor]}];
-    SlatherShow.make(SSSystemAlertType).ss_title(@"Test").ss_message(@"Message here").ss_cancleTitle(@"Cancel").ss_actionTitle(@[@"OK"]).ss_actionHandle(^(NSUInteger index){
+    
+    SlatherShow.makeSysAlert(1).ss_title(@"Test").ss_message(@"Message here").ss_cancleTitle(@"Cancel").ss_actionTitle(@[@"OK"]).ss_actionHandle(^(NSUInteger index){
         switch (index) {
             case 0:
                 NSLog(@"000");

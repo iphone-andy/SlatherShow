@@ -56,7 +56,7 @@ typedef void (^AlertClickBlock)(id alert, NSInteger buttonIndex);//alert 在iOS8
  */
 - (BOOL)addTextFieldWithType:(SSSystemAlertViewTextFieldStyle)style configurationHandler:(void (^)( NSArray<UITextField *> *textFields))configurationHandler;
 
-#pragma mark - chainable alert 
+#pragma mark - chainable alert
 
 - (SSSystemAlertView *(^)(void))ss_alertInit;
 
