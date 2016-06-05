@@ -8,24 +8,28 @@
 
 #import "UIKit/UIKit.h"
 
+@class SSCustomAlertView;
+
+typedef void (^CustomAlertClickBlock)(SSCustomAlertView *alertView, NSInteger buttonIndex);
+
 @interface SSCustomAlertView : UIView
 
-@property (nonatomic, strong) UIColor *tintColor;
-@property (nonatomic, strong, readonly) UIView *contentView;
-@property (nonatomic) BOOL keepTopAlignment;
-@property (nonatomic, weak) id<UIAlertViewDelegate> delegate;
+@property(nonatomic, strong) UIColor *tintColor;
+@property(nonatomic, assign, readonly) NSInteger cancelButtonIndex;
+@property(nonatomic, assign, readonly) NSInteger firstOtherButtonIndex;
+@property(nonatomic, assign, readonly) NSInteger numberOfButtons;
+@property(nonatomic, strong) NSString *title;
+@property(nonatomic, strong) NSAttributedString *attributeTitle;
+@property(nonatomic, strong) NSString *message;
+@property(nonatomic, strong) NSAttributedString *attributeMessage;
+@property(nonatomic, assign) BOOL buttonsShouldStack; //按钮是否列表显示(只有两个按钮的时候)
+@property(nonatomic, copy) CustomAlertClickBlock clickBlock;
 
-@property(nonatomic) NSInteger cancelButtonIndex;
-@property(nonatomic, readonly) NSInteger firstOtherButtonIndex;
-@property(nonatomic, copy) NSString *message;
-@property(nonatomic, readonly) NSInteger numberOfButtons;
-@property(nonatomic, copy) NSString *title;
-@property(nonatomic, readonly, getter=isVisible) BOOL visible;
-@property(nonatomic) BOOL buttonsShouldStack; //按钮列表显示
-
-- (id)initWithTitle:(NSString *)title message:(NSString *)message delegate:(id)delegate cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)otherButtonTitles, ...;
+- (instancetype)initWithTitle:(NSString *)title message:(NSString *)message clickBlock:(CustomAlertClickBlock)clickBlock cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSArray *)otherButtons;
 - (NSString *)buttonTitleAtIndex:(NSInteger)buttonIndex;
 - (NSInteger)addButtonWithTitle:(NSString *)title;
+- (void)addCustomView:(UIView *)customView;
 - (void)show;
+- (void)dismiss;
 
 @end
