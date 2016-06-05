@@ -60,10 +60,6 @@ typedef void (^AlertClickBlock)(id alert, NSInteger buttonIndex);//alert 在iOS8
 
 - (SSSystemAlertView *(^)(void))ss_alertInit;
 
-- (SSSystemAlertView *(^)(void))ss_show;
-
-- (void(^)(void))ss_dismiss;
-
 - (SSSystemAlertView *(^)(NSString *title))ss_title;
 
 - (SSSystemAlertView *(^)(NSAttributedString *attributedTitle))ss_attributedTitle;
@@ -79,5 +75,9 @@ typedef void (^AlertClickBlock)(id alert, NSInteger buttonIndex);//alert 在iOS8
 - (SSSystemAlertView *(^)(NSArray <NSString *>*actionTitle))ss_actionTitle;
 
 - (SSSystemAlertView *(^)(void (^handle)(NSUInteger index)))ss_actionHandle;
+
+- (SSSystemAlertView *(^)(void))ss_show;
+
+- (void(^)(void))ss_dismiss;
 
 @end

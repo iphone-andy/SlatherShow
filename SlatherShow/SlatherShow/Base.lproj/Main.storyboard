@@ -24,6 +24,13 @@
                                     <action selector="alertAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MAj-G8-y8w"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="18E-0P-enI">
+                                <rect key="frame" x="243" y="203" width="86" height="30"/>
+                                <state key="normal" title="custom alert"/>
+                                <connections>
+                                    <action selector="custom:" destination="BYZ-38-t0r" eventType="touchUpInside" id="f7X-sJ-a8M"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>

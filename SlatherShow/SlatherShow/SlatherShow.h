@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "SSSystemAlertView.h"
+#import "SSCustomAlertView.h"
 
 typedef NS_ENUM(NSUInteger, SlatherShowType) {
     SSSystemAlertType = 1,

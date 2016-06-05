@@ -21,10 +21,26 @@
 //    SlatherShow.systemAlert.show;
     
 }
+- (IBAction)custom:(id)sender {
+    
+    SSCustomAlertView *alertView = [[SSCustomAlertView alloc] initWithTitle:@"Test" message:@"Message here" delegate:self cancelButtonTitle:@"Cancel*****************" otherButtonTitles:@"OK", nil];
+    
+//    [alertView addButtonWithTitle:@"3rd"];
+    for (NSInteger titleIndex = 0; titleIndex < alertView.numberOfButtons; titleIndex++) {
+        NSLog(@"%@: button title for index %zd is: %@", [alertView class], titleIndex, [alertView buttonTitleAtIndex:titleIndex]);
+    }
+    
+    NSLog(@"%@: First other button index: %li", [alertView class], (long)alertView.firstOtherButtonIndex);
+    NSLog(@"%@: Cancel button index: %li", [alertView class], (long)alertView.cancelButtonIndex);
+    NSLog(@"%@: Number of buttons: %li", [alertView class], (long)alertView.numberOfButtons);
+    
+    [alertView show];
+    
+}
 - (IBAction)alertAction:(UIButton *)sender {
     
     NSAttributedString *att = [[NSAttributedString alloc] initWithString:@"hello erasds sdsd asds sdsds sd " attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:20.0],NSForegroundColorAttributeName : [UIColor redColor]}];
-    SlatherShow.make(SSSystemAlertType).ss_title(@"text").ss_attributedMessage(att).ss_message(@"hello").ss_cancleTitle(@"0").ss_actionTitle(@[@"1",@"2",@"3",@"4"]).ss_actionHandle(^(NSUInteger index){
+    SlatherShow.make(SSSystemAlertType).ss_title(@"Test").ss_message(@"Message here").ss_cancleTitle(@"Cancel").ss_actionTitle(@[@"OK",@"3rd"]).ss_actionHandle(^(NSUInteger index){
         switch (index) {
             case 0:
                 NSLog(@"000");
