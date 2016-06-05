@@ -138,8 +138,6 @@
     }
     
     BOOL sideBySideButtons = (self.numberOfButtons == 2) && !self.buttonsShouldStack;
-    BOOL buttonsShouldStack = !sideBySideButtons;
-    
     if (sideBySideButtons) {
         CGFloat halfWidth = (kAlertWidth / 2.0);
         
@@ -156,7 +154,7 @@
         NSInteger numberOfOtherButtons = [self.otherButtonsTitles count];
         
         if (numberOfOtherButtons > 0) {
-            CGFloat tableHeight = buttonsShouldStack ? numberOfOtherButtons * kButtonHeight : kButtonHeight;
+            CGFloat tableHeight = self.buttonsShouldStack ? numberOfOtherButtons * kButtonHeight : kButtonHeight;
             
             _buttonTableView = [self tableViewWithFrame:CGRectMake(0.0, yOffset, kAlertWidth, tableHeight)];
             
@@ -193,7 +191,13 @@
     [self.contentView addSubview:lineView];
 }
 
--(void) setTitle:(NSString *)title
+- (void)setButtonsShouldStack:(BOOL)buttonsShouldStack{
+
+    _buttonsShouldStack = buttonsShouldStack;
+    [self setupWithTitle:self.title message:self.message cancelButtonTitle:self.cancelButtonTitle otherButtonTitles:self.otherButtonsTitles];
+}
+
+- (void)setTitle:(NSString *)title
 {
     _title = title;
     UIFont *titleFont = [UIFont boldSystemFontOfSize:17.0];
@@ -504,14 +508,17 @@
     UIView *contentView = cell.contentView;
     
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0.0, contentView.frame.size.height - 0.5, contentView.frame.size.width, 0.5)];
-    lineView.tag = 1111;
     lineView.backgroundColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.5];
     lineView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     
     [contentView addSubview:lineView];
     
     cell.tag = buttonIndex;
-    lineView.hidden = lastRow;
+    if (self.buttonsShouldStack && self.numberOfButtons == 2 && [self.cancelButtonTitle length] > 0 && tableView == self.buttonTableView) {
+        lineView.hidden = NO;
+    }else{
+        lineView.hidden = lastRow;
+    }
     cell.textLabel.font = boldButton ? [UIFont boldSystemFontOfSize:17.0] : [UIFont systemFontOfSize:17.0];
     if (labelText && [labelText isKindOfClass:[NSAttributedString class]]) {
         cell.textLabel.attributedText = (NSAttributedString *)labelText;

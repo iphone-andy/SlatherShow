@@ -15,14 +15,14 @@ typedef void (^CustomAlertClickBlock)(SSCustomAlertView *alertView, NSInteger bu
 @interface SSCustomAlertView : UIView
 
 @property(nonatomic, strong) UIColor *tintColor;
-@property(nonatomic, assign, readonly) NSInteger cancelButtonIndex;
-@property(nonatomic, assign, readonly) NSInteger firstOtherButtonIndex;
+@property(nonatomic, assign, readonly) NSInteger cancelButtonIndex; //取消按钮的index = numberofbuttons - 1
+@property(nonatomic, assign, readonly) NSInteger firstOtherButtonIndex; // = 0
 @property(nonatomic, assign, readonly) NSInteger numberOfButtons;
 @property(nonatomic, strong) NSString *title;
 @property(nonatomic, strong) NSAttributedString *attributeTitle;
 @property(nonatomic, strong) NSString *message;
 @property(nonatomic, strong) NSAttributedString *attributeMessage;
-@property(nonatomic, assign) BOOL buttonsShouldStack; //按钮是否列表显示(只有两个按钮的时候)
+@property(nonatomic, assign) BOOL buttonsShouldStack; //按钮是否列表显示(只有两个按钮的时候,当按钮的文本过长时，可以选择分两行来展示按钮)
 @property(nonatomic, copy) CustomAlertClickBlock clickBlock; //按钮点击触发事件
 
 /**
@@ -31,7 +31,7 @@ typedef void (^CustomAlertClickBlock)(SSCustomAlertView *alertView, NSInteger bu
  *  @param title             title
  *  @param message           message
  *  @param cancelButtonTitle cancelButtonTitle
- *  @param otherButtons      otherButtons
+ *  @param otherButtons      otherButtons 可以设置为attributeString
  *
  *  @return SSCustomAlertView
  */
@@ -86,7 +86,7 @@ typedef void (^CustomAlertClickBlock)(SSCustomAlertView *alertView, NSInteger bu
 - (SSCustomAlertView *(^)(NSAttributedString *attributedMessage))ss_attributedMessage;
 
 - (SSCustomAlertView *(^)(NSString *cancleTitle))ss_cancleTitle;
-
+// 可以设置为attributeString
 - (SSCustomAlertView *(^)(NSArray *actionTitle))ss_actionTitle;
 
 - (SSCustomAlertView *(^)(CustomAlertClickBlock))ss_actionHandle;
