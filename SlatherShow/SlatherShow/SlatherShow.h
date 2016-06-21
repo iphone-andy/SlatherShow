@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "SSSystemAlertView.h"
 #import "SSCustomAlertView.h"
+#import "SSSystemActionSheet.h"
 
 typedef NS_ENUM(NSUInteger, SlatherShowType) {
     SSSystemAlertType = 1,
@@ -25,5 +26,7 @@ typedef NS_ENUM(NSUInteger, SlatherShowType) {
 + (SSSystemAlertView *(^)(void))makeSysAlert;
 
 + (SSCustomAlertView *(^)(void))makeCusAlert;
+
++ (SSSystemActionSheet *(^)(void))makeSysSheet;
 
 @end

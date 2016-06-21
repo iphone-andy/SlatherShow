@@ -9,7 +9,6 @@
 #import "SSSystemAlertView.h"
 #import <objc/runtime.h>
 
-#define IOS8Later [[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wunused-variable"

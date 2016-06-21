@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "SlatherShow.h"
+#import "SSSystemActionSheet.h"
 
 @interface ViewController ()
 
@@ -20,6 +21,8 @@
     // Do any additional setup after loading the view, typically from a nib.
 //    SlatherShow.systemAlert.show;
     
+    NSMutableArray *tets = [NSMutableArray array];
+    [tets removeAllObjects];
 }
 - (IBAction)custom:(id)sender {
     
@@ -65,7 +68,30 @@
         }
     }).ss_show();
 }
+- (IBAction)sysSheet:(id)sender {
+    
+    UIActionSheet *action = [[UIActionSheet alloc] initWithTitle:@"TEST" delegate:self cancelButtonTitle:@"Cancle" destructiveButtonTitle:@"destructive" otherButtonTitles:@"other1",@"2222", nil];
+    //    action.destructiveButtonIndex = 1;
+    [action showInView:self.view];
+    
+}
+- (IBAction)cusSheet:(id)sender {
+    
+//    [SSSystemActionSheet showActionSheetWithTitle:@"test" message:@"sdshh" cancelButtonTitle:@"cancle" destructiveButtonTitle:@"spesion" otherButtonTitles:@[@"wwqw",@"sdsd"] handler:^(id alert, NSInteger buttonIndex) {
+//        NSLog(@"index %zd",buttonIndex);
+//    }];
+    SlatherShow.makeSysSheet().ss_title(@"TEST").ss_cancleTitle(@"Cancle").ss_destructiveTitle(@"des").ss_actionTitle(@[@"other1",@"2222"]).ss_actionHandle(^(NSUInteger index){
+    
+        NSLog(@"----%zd",index);
+    }).ss_show();
+    
+}
 
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex NS_DEPRECATED_IOS(2_0, 8_3) __TVOS_PROHIBITED;
+{
+
+    NSLog(@"index %zd",buttonIndex);
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

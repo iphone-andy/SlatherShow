@@ -31,6 +31,20 @@
                                     <action selector="custom:" destination="BYZ-38-t0r" eventType="touchUpInside" id="f7X-sJ-a8M"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5qg-VW-Hwz">
+                                <rect key="frame" x="95" y="268" width="113" height="30"/>
+                                <state key="normal" title="cus action sheet"/>
+                                <connections>
+                                    <action selector="cusSheet:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IHQ-5Y-1Uc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Qa-ML-T0b">
+                                <rect key="frame" x="95" y="346" width="112" height="30"/>
+                                <state key="normal" title="sys action sheet"/>
+                                <connections>
+                                    <action selector="sysSheet:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WRi-28-UE7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>

@@ -7,6 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
+#define IOS8Later [[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0
 
 @interface SSBaseView : NSObject
 

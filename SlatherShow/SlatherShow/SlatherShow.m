@@ -29,4 +29,12 @@
     };
 }
 
++ (SSSystemActionSheet *(^)(void))makeSysSheet;
+{
+    return ^(){
+        [SSSystemActionSheet shareInstance].ss_actionSheetInit();
+        return [SSSystemActionSheet shareInstance];
+    };
+}
+
 @end

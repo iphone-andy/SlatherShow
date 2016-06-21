@@ -70,7 +70,7 @@ typedef void (^AlertClickBlock)(id alert, NSInteger buttonIndex);//alert 在iOS8
 
 - (SSSystemAlertView *(^)(NSString *cancleTitle))ss_cancleTitle;
 
-- (SSSystemAlertView *(^)(void (^handle)(void)))ss_cancleHandle;
+//- (SSSystemAlertView *(^)(void (^handle)(void)))ss_cancleHandle;
 
 - (SSSystemAlertView *(^)(NSArray <NSString *>*actionTitle))ss_actionTitle;
 
