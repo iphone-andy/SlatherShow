@@ -8,10 +8,11 @@
 
 #import "SSCustomAlertView.h"
 
-#define kSideMargin         15.0
-#define kTopBottomMargin    19.0
-#define kAlertWidth         270.0
-#define kButtonHeight       44.0
+#define kSideMargin           15.0
+#define kTopBottomMargin      19.0
+#define kAlertWidth           270.0
+#define kButtonHeight         44.0
+#define kAnimationDuration    0.5058237314224243
 
 @interface SSCustomAlertView ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -356,7 +357,7 @@
         transformAnimation.damping = 500.0;
         transformAnimation.mass = 3.0;
         transformAnimation.stiffness = 1000.0;
-        transformAnimation.duration = 0.5058237314224243;
+        transformAnimation.duration = kAnimationDuration;
         transformAnimation.fromValue = [NSValue valueWithCATransform3D:transformFrom];
         transformAnimation.toValue = [NSValue valueWithCATransform3D:transformTo];
         transformAnimation.delegate = self;
@@ -368,7 +369,7 @@
         opacityAnimation.damping = 500.0;
         opacityAnimation.mass = 3.0;
         opacityAnimation.stiffness = 1000.0;
-        opacityAnimation.duration = 0.5058237314224243;
+        opacityAnimation.duration = kAnimationDuration;
         opacityAnimation.delegate = self;
         opacityAnimation.fromValue = @0.0f;
         opacityAnimation.toValue = @1.0f;
@@ -385,13 +386,13 @@
 - (void)dismissAlertAnimation{
     [CATransaction begin]; {
         CATransform3D transformFrom = CATransform3DMakeScale(1.0, 1.0, 1.0);
-        CATransform3D transformTo = CATransform3DMakeScale(0.840, 0.840, 1.0);
+        CATransform3D transformTo = CATransform3DMakeScale(0.84, 0.84, 1.0);
         
         CASpringAnimation *transformAnimation = [CASpringAnimation animationWithKeyPath:@"transform"];
         transformAnimation.damping = 500.0;
         transformAnimation.mass = 3.0;
         transformAnimation.stiffness = 1000.0;
-        transformAnimation.duration = 0.5058237314224243;
+        transformAnimation.duration = kAnimationDuration;
         transformAnimation.fromValue = [NSValue valueWithCATransform3D:transformFrom];
         transformAnimation.toValue = [NSValue valueWithCATransform3D:transformTo];
         transformAnimation.delegate = self;
@@ -404,7 +405,7 @@
         opacityAnimation.damping = 500.0;
         opacityAnimation.mass = 3.0;
         opacityAnimation.stiffness = 1000.0;
-        opacityAnimation.duration = 0.5058237314224243;
+        opacityAnimation.duration = kAnimationDuration;
         opacityAnimation.delegate = self;
         opacityAnimation.fromValue = @1.0f;
         opacityAnimation.toValue = @0.0f;
@@ -418,7 +419,9 @@
     } [CATransaction commit];
 }
 
+//点击背景当前alert是否消失
 - (void)backgroundTapAction:(UITapGestureRecognizer *)tap{
+    [self dismiss];
     NSLog(@"taped");
 }
 
