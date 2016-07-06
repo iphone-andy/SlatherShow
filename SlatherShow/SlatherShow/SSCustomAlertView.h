@@ -22,9 +22,22 @@ typedef void (^CustomAlertClickBlock)(SSCustomAlertView *alertView, NSInteger bu
 @property(nonatomic, strong) NSAttributedString *attributeTitle;
 @property(nonatomic, strong) NSString *message;
 @property(nonatomic, strong) NSAttributedString *attributeMessage;
-@property(nonatomic, assign) BOOL buttonsShouldStack; //按钮是否列表显示(只有两个按钮的时候,当按钮的文本过长时，可以选择分两行来展示按钮)
+@property(nonatomic, assign) BOOL buttonsShouldStack; //按钮是否列表显示(只有两个按钮的时候,当按钮的文本过长时，可以选择分两行来展示按钮),默认为NO
+@property(nonatomic, assign) BOOL tapBackgroundDismiss; //点击背景是否dismiss当前alert、默认为NO
 @property(nonatomic, copy) CustomAlertClickBlock clickBlock; //按钮点击触发事件
 
+/**
+ *  类方法调用
+ *
+ *  @param title             title
+ *  @param message           message
+ *  @param clickBlock        clickBlock 按钮点击回调
+ *  @param cancelButtonTitle cancelButtonTitle
+ *  @param otherButtons      otherButtons
+ *
+ *  @return SSCustomAlertView
+ */
++ (void)showWithTitle:(NSString *)title message:(NSString *)message clickBlock:(CustomAlertClickBlock)clickBlock cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSArray *)otherButtons;
 /**
  *  初始化 不带clickBlock，所以初始化完以后需要另外赋值clickBlock属性
  *
@@ -92,6 +105,10 @@ typedef void (^CustomAlertClickBlock)(SSCustomAlertView *alertView, NSInteger bu
 - (SSCustomAlertView *(^)(CustomAlertClickBlock))ss_actionHandle;
 
 - (SSCustomAlertView *(^)(UIView *customView))ss_addCustomView;
+
+- (SSCustomAlertView *(^)(BOOL tapDismiss))ss_setTapDismiss;
+
+- (SSCustomAlertView *(^)(BOOL buttonStack))ss_setButtonStack;
 
 - (SSCustomAlertView *(^)(void))ss_show;
 

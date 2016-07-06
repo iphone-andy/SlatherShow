@@ -49,6 +49,11 @@
     return alert;
 }
 
++ (void)showWithTitle:(NSString *)title message:(NSString *)message clickBlock:(CustomAlertClickBlock)clickBlock cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSArray *)otherButtons
+{
+    [[[SSCustomAlertView shareInstance] initWithTitle:title message:message clickBlock:clickBlock cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtons] show];
+}
+
 - (instancetype)initWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSArray *)otherButtons
 {
     return [self initWithTitle:title message:message clickBlock:nil cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtons];
@@ -309,15 +314,15 @@
 
 - (void)show
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[[UIApplication sharedApplication] delegate] window].frame];
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.tintColor = self.tintColor;
-    UIViewController *viewController = [[UIViewController alloc] init];
-    viewController.view = self.alertContainerView;
-    self.window.rootViewController = viewController;
+//    UIViewController *viewController = [[UIViewController alloc] init];
+//    viewController.view = self.alertContainerView;
+//    self.window.rootViewController = viewController;
     self.window.backgroundColor = [UIColor clearColor];
     self.window.windowLevel = UIWindowLevelAlert;
     self.window.hidden = NO;
-    
+    [self.window addSubview:self.alertContainerView];
     [self transformAlertContainerViewForOrientation];
     [self.window makeKeyAndVisible];
     [self showAlertAnimation];
@@ -421,7 +426,9 @@
 
 //点击背景当前alert是否消失
 - (void)backgroundTapAction:(UITapGestureRecognizer *)tap{
-    [self dismiss];
+    if (self.tapBackgroundDismiss) {
+        [self dismissAlertAnimation];
+    }
     NSLog(@"taped");
 }
 
@@ -608,6 +615,18 @@
 
 - (SSCustomAlertView *(^)(void))ss_alertInit{
     return ^(){
+        [SSCustomAlertView shareInstance].title = @"";
+        [SSCustomAlertView shareInstance].message = @"";
+        [SSCustomAlertView shareInstance].cancelButtonTitle = @"";
+        [SSCustomAlertView shareInstance].attributeMessage = [[NSAttributedString alloc] initWithString:@""];
+        [SSCustomAlertView shareInstance].attributeTitle = [[NSAttributedString alloc] initWithString:@""];
+
+        [SSCustomAlertView shareInstance].buttonsShouldStack = NO;
+        [SSCustomAlertView shareInstance].tapBackgroundDismiss = NO;
+        [SSCustomAlertView shareInstance].otherButtonsTitles = nil;
+        [SSCustomAlertView shareInstance].clickBlock = nil;
+        [SSCustomAlertView shareInstance].customViewArray = nil;
+
         return [SSCustomAlertView shareInstance];
     };
 }
@@ -688,6 +707,22 @@
 - (SSCustomAlertView *(^)(CustomAlertClickBlock))ss_actionHandle{
     return ^(CustomAlertClickBlock clickblock){
         [SSCustomAlertView shareInstance].clickBlock = [clickblock copy];
+        return [SSCustomAlertView shareInstance];
+    };
+}
+
+- (SSCustomAlertView *(^)(BOOL tapDismiss))ss_setTapDismiss
+{
+    return ^(BOOL tapDismiss){
+        [SSCustomAlertView shareInstance].tapBackgroundDismiss = tapDismiss;
+        return [SSCustomAlertView shareInstance];
+    };
+}
+
+- (SSCustomAlertView *(^)(BOOL buttonStack))ss_setButtonStack
+{
+    return ^(BOOL buttonStack){
+        [SSCustomAlertView shareInstance].buttonsShouldStack = buttonStack;
         return [SSCustomAlertView shareInstance];
     };
 }

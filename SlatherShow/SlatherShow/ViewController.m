@@ -25,27 +25,30 @@
     [tets removeAllObjects];
 }
 - (IBAction)custom:(id)sender {
-    
-    SSCustomAlertView *alertView = [[SSCustomAlertView alloc] initWithTitle:@"Test" message:@"Message here" clickBlock:^(SSCustomAlertView *alertView, NSInteger buttonIndex) {
-        NSLog(@"%zd",buttonIndex);
-    }cancelButtonTitle:@"sdsdsdsdsdsdsdsd" otherButtonTitles:@[@"OK"]];
-    alertView.buttonsShouldStack = YES;
-//    UITextField *testView = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 380, 40)];
-//    testView.borderStyle = UITextBorderStyleRoundedRect;
-//    testView.placeholder = @"ysdsdsdsd";
-//    [alertView addCustomView:testView];
-//    UITextField *colorVieww = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 2, 40)];
-//    colorVieww.backgroundColor = [UIColor redColor];
-//    colorVieww.borderStyle = UITextBorderStyleRoundedRect;
-//    colorVieww.placeholder = @"colosdsds";
-//    [alertView addCustomView:colorVieww];
-//
-////    [alertView addButtonWithTitle:@"3rd"];
-////    [alertView addButtonWithTitle:@"4rd"];
-    [alertView show];
-//    SlatherShow.makeCusAlert().ss_title(@"test").ss_message(@"hello").ss_cancleTitle(@"Cancle").ss_actionTitle(@[@"OK"]).ss_actionHandle(^(SSCustomAlertView *alertView, NSInteger buttonIndex){
-//        NSLog(@"butt--%zd",buttonIndex);
-//    }).ss_show();
+//    [SSCustomAlertView showWithTitle:@"ssd" message:@"ssdsd" clickBlock:^(SSCustomAlertView *alertView, NSInteger buttonIndex) {
+//        
+//    } cancelButtonTitle:@"ssd" otherButtonTitles:nil];
+//    
+//    SSCustomAlertView *alertView = [[SSCustomAlertView alloc] initWithTitle:@"Test" message:@"Message here" clickBlock:^(SSCustomAlertView *alertView, NSInteger buttonIndex) {
+//        NSLog(@"%zd",buttonIndex);
+//    }cancelButtonTitle:@"sdsdsdsdsdsdsdsd" otherButtonTitles:@[@"OK"]];
+//    alertView.buttonsShouldStack = YES;
+////    UITextField *testView = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 380, 40)];
+////    testView.borderStyle = UITextBorderStyleRoundedRect;
+////    testView.placeholder = @"ysdsdsdsd";
+////    [alertView addCustomView:testView];
+////    UITextField *colorVieww = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 2, 40)];
+////    colorVieww.backgroundColor = [UIColor redColor];
+////    colorVieww.borderStyle = UITextBorderStyleRoundedRect;
+////    colorVieww.placeholder = @"colosdsds";
+////    [alertView addCustomView:colorVieww];
+////
+//////    [alertView addButtonWithTitle:@"3rd"];
+//////    [alertView addButtonWithTitle:@"4rd"];
+//    [alertView show];
+    SlatherShow.makeCusAlert().ss_title(@"test").ss_message(@"hello").ss_cancleTitle(@"Cancle").ss_actionTitle(@[@"OK"]).ss_actionHandle(^(SSCustomAlertView *alertView, NSInteger buttonIndex){
+        NSLog(@"butt--%zd",buttonIndex);
+    }).ss_setTapDismiss(YES).ss_setButtonStack(YES).ss_show();
     
 }
 - (IBAction)alertAction:(UIButton *)sender {
