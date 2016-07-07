@@ -10,7 +10,7 @@
 #import "SlatherShow.h"
 #import "SSSystemActionSheet.h"
 
-@interface ViewController ()
+@interface ViewController ()<UIActionSheetDelegate>
 
 @end
 

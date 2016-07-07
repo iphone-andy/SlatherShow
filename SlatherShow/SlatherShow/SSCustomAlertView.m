@@ -72,6 +72,8 @@
 
 - (void)setupWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSArray *)otherButtonTitles;
 {
+    //通过window 的 rootviewcontroller 实现屏幕旋转
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(screenRotate:animation:) name:@"UIWindowWillRotateNotification" object:nil];
     _cancelButtonIndex = -1;
     _firstOtherButtonIndex = -1;
     _cancelButtonTitle = nil;
@@ -287,8 +289,61 @@
     return tableView;
 }
 
-- (void)transformAlertContainerViewForOrientation{
 #define DegreesToRadians(degrees) (degrees * M_PI / 180)
+
+- (void)screenRotate:(NSNotification *)noti animation:(BOOL)animation
+{
+    UIInterfaceOrientation orientation = [[noti.userInfo objectForKey:@"UIWindowNewOrientationUserInfoKey"] integerValue];
+    if (!noti) {
+        return;
+    }
+    animation = YES;
+    
+    NSTimeInterval i = [UIApplication sharedApplication].statusBarOrientationAnimationDuration;
+    NSTimeInterval time = 0.3 + i;
+    
+    if (!animation) {
+        time = 0.0;
+    }
+    switch (orientation)
+    {
+        case UIInterfaceOrientationPortrait:
+        {
+            [UIView animateWithDuration:time animations:^{
+                self.representationView.transform = CGAffineTransformMakeRotation(DegreesToRadians(0));
+            } completion:nil];
+        }
+            break;
+        case UIInterfaceOrientationPortraitUpsideDown:
+        {
+            [UIView animateWithDuration:time animations:^{
+                self.representationView.transform = CGAffineTransformMakeRotation(DegreesToRadians(180));
+            } completion:nil];
+        }
+            break;
+            
+        case UIInterfaceOrientationLandscapeRight:
+        {
+            [UIView animateWithDuration:time animations:^{
+                self.representationView.transform = CGAffineTransformMakeRotation(DegreesToRadians(90));
+            } completion:nil];
+            
+        }
+            break;
+            
+        case UIInterfaceOrientationLandscapeLeft:
+        {
+            [UIView animateWithDuration:time animations:^{
+                self.representationView.transform = CGAffineTransformMakeRotation(-DegreesToRadians(90));
+            } completion:nil];
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)transformAlertContainerViewForOrientation{
     UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
     CGAffineTransform transform;
     switch (orientation) {
@@ -316,14 +371,14 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.tintColor = self.tintColor;
-//    UIViewController *viewController = [[UIViewController alloc] init];
-//    viewController.view = self.alertContainerView;
-//    self.window.rootViewController = viewController;
+    SSWindowController *viewController = [[SSWindowController alloc] init];
+    viewController.view = self.alertContainerView;
+    self.window.rootViewController = viewController;
     self.window.backgroundColor = [UIColor clearColor];
-    self.window.windowLevel = UIWindowLevelAlert;
+    self.window.windowLevel = UIWindowLevelStatusBar + 2;
     self.window.hidden = NO;
-    [self.window addSubview:self.alertContainerView];
-    [self transformAlertContainerViewForOrientation];
+//    [self.window addSubview:self.alertContainerView];
+//    [self transformAlertContainerViewForOrientation];
     [self.window makeKeyAndVisible];
     [self showAlertAnimation];
 

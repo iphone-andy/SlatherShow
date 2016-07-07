@@ -11,6 +11,10 @@
 
 #define IOS8Later [[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0
 
+@interface SSWindowController : UIViewController
+
+@end
+
 @interface SSBaseView : NSObject
 
 - (void)show;
@@ -18,3 +22,4 @@
 - (void)dismiss;
 
 @end
+
