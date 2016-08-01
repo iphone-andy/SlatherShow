@@ -38,9 +38,18 @@ static const char SSSystemActionSheet_ClassMethodActionBlockIdentify;
 + (SSSystemActionSheet *)showActionSheetWithTitle:(NSString *)title
                                           message:(NSString *)message
                                 cancelButtonTitle:(NSString *)cancelButtonTitle
-                           destructiveButtonTitle:(NSString *)destructiveButtonTitle
                                 otherButtonTitles:(NSArray *)otherButtonTitles
-                                          handler:(ActionSheetClickBlock)block
+                                          handler:(ActionSheetClickBlock)block{
+   return [self showActionSheetWithTitle:title message:message cancelButtonTitle:cancelButtonTitle destructiveButtonTitle:nil destructiveButtonIndex:-1 otherButtonTitles:otherButtonTitles handler:block];
+}
+
++ (SSSystemActionSheet *)showActionSheetWithTitle:(NSString *)title
+                                          message:(NSString *)message
+                                cancelButtonTitle:(NSString *)cancelButtonTitle
+                           destructiveButtonTitle:(NSString *)destructiveButtonTitle
+                           destructiveButtonIndex:(NSInteger)destructiveButtonIndex
+                                otherButtonTitles:(NSArray *)otherButtonTitles
+                                          handler:(ActionSheetClickBlock)block;
 {
     if (!cancelButtonTitle.length && !otherButtonTitles.count)
         cancelButtonTitle = @"取消";
@@ -52,29 +61,61 @@ static const char SSSystemActionSheet_ClassMethodActionBlockIdentify;
                     block((UIAlertController *)[SSSystemActionSheet shareInstance].yzAction,otherButtonTitles.count);
                 }
             });
-            
         }];
         [(UIAlertController *)[SSSystemActionSheet shareInstance].yzAction addAction:cancelAction];
+        
+        UIAlertAction *destrutiveAction;
+        NSInteger destructiveButtonLocation = -1;
         if (destructiveButtonTitle.length > 0) {
-            UIAlertAction *destrutiveAction = [UIAlertAction actionWithTitle:destructiveButtonTitle style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+
+            destructiveButtonLocation = destructiveButtonIndex < 0 ? 0 : (destructiveButtonIndex > otherButtonTitles.count ? otherButtonTitles.count : destructiveButtonIndex);
+            destrutiveAction = [UIAlertAction actionWithTitle:destructiveButtonTitle style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (block) {
-                        block((UIAlertController *)[SSSystemActionSheet shareInstance].yzAction,0);
+                        block((UIAlertController *)[SSSystemActionSheet shareInstance].yzAction,destructiveButtonLocation);
                     }
                 });
             }];
-            [(UIAlertController *)[SSSystemActionSheet shareInstance].yzAction addAction:destrutiveAction];
         }
+
         [otherButtonTitles enumerateObjectsUsingBlock:^(NSString *button, NSUInteger index, BOOL *stop) {
-            UIAlertAction *buttonAction = [UIAlertAction actionWithTitle:button style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if (block) {
-                        block((UIAlertController *)[SSSystemActionSheet shareInstance].yzAction,destructiveButtonTitle.length > 0 ? index + 1 : index);
+            
+            if (destrutiveAction) {
+                if (destructiveButtonLocation == otherButtonTitles.count) {
+                    UIAlertAction *buttonAction = [UIAlertAction actionWithTitle:button style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            if (block) {
+                                block((UIAlertController *)[SSSystemActionSheet shareInstance].yzAction,(destructiveButtonLocation == -1) ? index : ( index >=destructiveButtonLocation ? index + 1 : index));
+                            }
+                        });
+                    }];
+                    [(UIAlertController *)[SSSystemActionSheet shareInstance].yzAction addAction:buttonAction];
+                    if (index + 1 == destructiveButtonLocation) {
+                        [(UIAlertController *)[SSSystemActionSheet shareInstance].yzAction addAction:destrutiveAction];
                     }
-                });
-                
-            }];
-            [(UIAlertController *)[SSSystemActionSheet shareInstance].yzAction addAction:buttonAction];
+                }else{
+                    if (index == destructiveButtonLocation) {
+                        [(UIAlertController *)[SSSystemActionSheet shareInstance].yzAction addAction:destrutiveAction];
+                    }
+                    UIAlertAction *buttonAction = [UIAlertAction actionWithTitle:button style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            if (block) {
+                                block((UIAlertController *)[SSSystemActionSheet shareInstance].yzAction,(destructiveButtonLocation == -1) ? index : ( index >=destructiveButtonLocation ? index + 1 : index));
+                            }
+                        });
+                    }];
+                    [(UIAlertController *)[SSSystemActionSheet shareInstance].yzAction addAction:buttonAction];
+                }
+            }else{
+                UIAlertAction *buttonAction = [UIAlertAction actionWithTitle:button style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if (block) {
+                            block((UIAlertController *)[SSSystemActionSheet shareInstance].yzAction,(destructiveButtonLocation == -1) ? index : ( index >=destructiveButtonLocation ? index + 1 : index));
+                        }
+                    });
+                }];
+                [(UIAlertController *)[SSSystemActionSheet shareInstance].yzAction addAction:buttonAction];
+            }
         }];
         //TODO:fix ipad show error
         [[self getCurrentVC] presentViewController:(UIAlertController *)[SSSystemActionSheet shareInstance].yzAction animated:YES completion:nil];
@@ -471,7 +512,7 @@ static const char SSSystemActionSheet_ClassMethodActionBlockIdentify;
         UIAlertAction *alertAction = [UIAlertAction actionWithTitle:title style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (block) {
-                    block(btnIndex - 1);
+                    block(btnIndex);
                 }
             });
         }];
@@ -492,7 +533,7 @@ static const char SSSystemActionSheet_ClassMethodActionBlockIdentify;
         UIAlertAction *alertAction = [UIAlertAction actionWithTitle:title style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (block) {
-                    block(btnIndex - 1);
+                    block(btnIndex);
                 }
             });
         }];

@@ -19,7 +19,14 @@ typedef void (^ActionSheetClickBlock)(id alert, NSInteger buttonIndex);//alert å
 + (SSSystemActionSheet *)showActionSheetWithTitle:(NSString *)title
                                           message:(NSString *)message
                                 cancelButtonTitle:(NSString *)cancelButtonTitle
+                                otherButtonTitles:(NSArray *)otherButtonTitles
+                                          handler:(ActionSheetClickBlock)block;
+
++ (SSSystemActionSheet *)showActionSheetWithTitle:(NSString *)title
+                                          message:(NSString *)message
+                                cancelButtonTitle:(NSString *)cancelButtonTitle
                            destructiveButtonTitle:(NSString *)destructiveButtonTitle
+                           destructiveButtonIndex:(NSInteger)destructiveButtonIndex
                                 otherButtonTitles:(NSArray *)otherButtonTitles
                                           handler:(ActionSheetClickBlock)block;
 

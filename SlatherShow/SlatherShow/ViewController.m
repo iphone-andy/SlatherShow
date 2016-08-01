@@ -80,13 +80,13 @@
 }
 - (IBAction)cusSheet:(id)sender {
     
-//    [SSSystemActionSheet showActionSheetWithTitle:@"test" message:@"sdshh" cancelButtonTitle:@"cancle" destructiveButtonTitle:@"spesion" otherButtonTitles:@[@"wwqw",@"sdsd"] handler:^(id alert, NSInteger buttonIndex) {
-//        NSLog(@"index %zd",buttonIndex);
-//    }];
-    SlatherShow.makeSysSheet().ss_title(@"TEST").ss_cancleTitle(@"Cancle").ss_destructiveTitle(@"des").ss_actionTitle(@[@"other1",@"2222"]).ss_actionHandle(^(NSUInteger index){
-    
-        NSLog(@"----%zd",index);
-    }).ss_show();
+    [SSSystemActionSheet showActionSheetWithTitle:@"test" message:@"sdshh" cancelButtonTitle:@"cancle" destructiveButtonTitle:@"spesion" destructiveButtonIndex:-1 otherButtonTitles:@[@"wwqw",@"sdsd"] handler:^(id alert, NSInteger buttonIndex) {
+        NSLog(@"index %zd",buttonIndex);
+    }];
+//    SlatherShow.makeSysSheet().ss_title(@"TEST").ss_cancleTitle(@"Cancle").ss_destructiveTitle(@"des").ss_actionTitle(@[@"other1",@"2222"]).ss_actionHandle(^(NSUInteger index){
+//    
+//        NSLog(@"----%zd",index);
+//    }).ss_show();
     
 }
 
