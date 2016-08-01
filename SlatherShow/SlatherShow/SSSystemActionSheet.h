@@ -8,9 +8,11 @@
 
 #import "SSBaseShow.h"
 
-typedef void (^ActionSheetClickBlock)(id alert, NSInteger buttonIndex);//alert 在iOS8以下为UIAlertView类型，iOS8以上为UIAlertController类型，调用者根据系统版本号自行判断
+typedef void (^ActionSheetClickBlock)(id alert, NSInteger buttonIndex);//alert 在iOS8以下为UIActionSheet类型，iOS8以上为UIAlertController类型，调用者根据系统版本号自行判断
 
 @interface SSSystemActionSheet : SSBaseShow
+
+#pragma mark - class Instance actionSheet
 
 + (SSSystemActionSheet *)shareInstance;
 
@@ -21,7 +23,7 @@ typedef void (^ActionSheetClickBlock)(id alert, NSInteger buttonIndex);//alert �
                                 otherButtonTitles:(NSArray *)otherButtonTitles
                                           handler:(ActionSheetClickBlock)block;
 
-#pragma mark - Instance alertView init
+#pragma mark - Instance actionSheet init
 
 + (instancetype)actionSheetWithTitle:(NSString *)title;
 + (instancetype)actionSheetWithTitle:(NSString *)title message:(NSString *)message;
@@ -33,7 +35,7 @@ typedef void (^ActionSheetClickBlock)(id alert, NSInteger buttonIndex);//alert �
 - (void)addDestructiveButtonWithTitle:(NSString *)title handler:(void (^)(void))block;
 - (void)setCancelButtonWithTitle:(NSString *)title handler:(void (^)(void))block;
 
-#pragma mark - chainable alert
+#pragma mark - chainable action sheet
 
 - (SSSystemActionSheet *(^)(void))ss_actionSheetInit;
 

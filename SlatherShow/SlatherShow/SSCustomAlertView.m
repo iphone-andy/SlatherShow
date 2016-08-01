@@ -369,42 +369,44 @@
 
 - (void)show
 {
-    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.tintColor = self.tintColor;
-    SSWindowController *viewController = [[SSWindowController alloc] init];
-    viewController.view = self.alertContainerView;
-    self.window.rootViewController = viewController;
-    self.window.backgroundColor = [UIColor clearColor];
-    self.window.windowLevel = UIWindowLevelStatusBar + 2;
-    self.window.hidden = NO;
-//    [self.window addSubview:self.alertContainerView];
-//    [self transformAlertContainerViewForOrientation];
-    [self.window makeKeyAndVisible];
-    [self showAlertAnimation];
-
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        self.window.tintColor = self.tintColor;
+        SSWindowController *viewController = [[SSWindowController alloc] init];
+        viewController.view = self.alertContainerView;
+        self.window.rootViewController = viewController;
+        self.window.backgroundColor = [UIColor clearColor];
+        self.window.windowLevel = UIWindowLevelStatusBar + 2;
+        self.window.hidden = NO;
+        //    [self.window addSubview:self.alertContainerView];
+        //    [self transformAlertContainerViewForOrientation];
+        [self.window makeKeyAndVisible];
+        [self showAlertAnimation];
+    });
 }
 
 - (void)dismiss{
-
-    self.window.hidden = YES;
-    self.window = nil;
     
     [self.buttonTableView deselectRowAtIndexPath:self.buttonTableView.indexPathForSelectedRow animated:NO];
     [self.otherTableView deselectRowAtIndexPath:self.otherTableView.indexPathForSelectedRow animated:NO];
     if (self.clickBlock) {
         self.clickBlock(self,self.dismissIndex);
     }
+    self.window.hidden = YES;
+    self.window = nil;
 }
 
 - (void)dismissWithClickedButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated
 {
     self.dismissIndex = buttonIndex;
-    
-    if (!animated) {
-        [self dismiss];
-    }else{
-        [self dismissAlertAnimation];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (!animated) {
+            [self dismiss];
+        }else{
+            [self dismissAlertAnimation];
+        }
+    });
+
 }
 
 - (void)showAlertAnimation{
@@ -482,7 +484,9 @@
 //点击背景当前alert是否消失
 - (void)backgroundTapAction:(UITapGestureRecognizer *)tap{
     if (self.tapBackgroundDismiss) {
-        [self dismissAlertAnimation];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self dismissAlertAnimation];
+        });
     }
     NSLog(@"taped");
 }
@@ -496,7 +500,9 @@
     }else if ([[anim valueForKey:@"transformKEY"] isEqualToString:@"dismiss"]){
         
         if (!flag) return;
-        [self dismiss];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self dismiss];
+        });
     }
 }
 
@@ -623,13 +629,12 @@
 
 - (NSInteger)addButtonWithTitle:(NSString *)title
 {
-    NSString *oldTitle = [self.title copy];
-    NSString *oldMessage = [self.message copy];
-    NSString *oldCancelTitle = [self.cancelButtonTitle copy];
-    NSMutableArray *allTitles = [[NSMutableArray alloc] initWithArray:self.otherButtonsTitles copyItems:YES];
-    [allTitles addObject:title];
-    [self setupWithTitle:oldTitle message:oldMessage cancelButtonTitle:oldCancelTitle otherButtonTitles:allTitles];
-    
+    if (self.otherButtonsTitles) {
+        [self.otherButtonsTitles addObject:title];
+    }else{
+        self.otherButtonsTitles = [NSMutableArray arrayWithObject:title];
+    }
+    [self setupWithTitle:self.title message:self.message cancelButtonTitle:self.cancelButtonTitle otherButtonTitles:self.otherButtonsTitles];
     return self.numberOfButtons - 1;
 }
 

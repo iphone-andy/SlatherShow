@@ -79,7 +79,9 @@ static const char SSSystemActionSheet_ClassMethodActionBlockIdentify;
         //TODO:fix ipad show error
         [[self getCurrentVC] presentViewController:(UIAlertController *)[SSSystemActionSheet shareInstance].yzAction animated:YES completion:nil];
     }else{
-        
+        if (!title.length && message.length > 0) {
+            title = message;
+        }
         [SSSystemActionSheet shareInstance].yzAction = [[UIActionSheet alloc] initWithTitle:title delegate:[self shareInstance] cancelButtonTitle:cancelButtonTitle destructiveButtonTitle:destructiveButtonTitle otherButtonTitles:nil];
         [otherButtonTitles enumerateObjectsUsingBlock:^(NSString *button, NSUInteger idx, BOOL *stop) {
             [(UIActionSheet *)[SSSystemActionSheet shareInstance].yzAction addButtonWithTitle:button];
@@ -167,9 +169,11 @@ static const char SSSystemActionSheet_ClassMethodActionBlockIdentify;
         title = @"取消";
     if (IOS8Later) {
         UIAlertAction *alertAction = [UIAlertAction actionWithTitle:title style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            if (block) {
-                block();
-            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (block) {
+                    block();
+                }
+            });
         }];
         [(UIAlertController *)[SSSystemActionSheet shareInstance].yzAction addAction:alertAction];
     }else{
@@ -486,9 +490,11 @@ static const char SSSystemActionSheet_ClassMethodActionBlockIdentify;
         title = @"取消";
     if (IOS8Later) {
         UIAlertAction *alertAction = [UIAlertAction actionWithTitle:title style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            if (block) {
-                block(btnIndex - 1);
-            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (block) {
+                    block(btnIndex - 1);
+                }
+            });
         }];
         [(UIAlertController *)[SSSystemActionSheet shareInstance].yzAction addAction:alertAction];
     }else{
@@ -506,9 +512,11 @@ static const char SSSystemActionSheet_ClassMethodActionBlockIdentify;
     
     if (IOS8Later) {
         UIAlertAction *alertAction = [UIAlertAction actionWithTitle:title style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-            if (block) {
-                block(btnIndex - 1);
-            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (block) {
+                    block(btnIndex - 1);
+                }
+            });
         }];
         [(UIAlertController *)[SSSystemActionSheet shareInstance].yzAction addAction:alertAction];
     }else{

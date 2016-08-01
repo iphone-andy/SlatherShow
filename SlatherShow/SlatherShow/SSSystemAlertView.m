@@ -144,9 +144,11 @@ static const char SSSystemAlertView_ClassMethodActionBlockIdentify;
         title = @"取消";
     if (IOS8Later) {
         UIAlertAction *alertAction = [UIAlertAction actionWithTitle:title style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            if (block) {
-                block();
-            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (block) {
+                    block();
+                }
+            });
         }];
         [(UIAlertController *)[SSSystemAlertView shareInstance].yzAlert addAction:alertAction];
     }else{
@@ -508,6 +510,16 @@ static const char SSSystemAlertView_ClassMethodActionBlockIdentify;
 - (void)setAlertAttributedMessage:(NSAttributedString *)attStr{
     if (IOS8Later) {
         [(UIAlertController *)[SSSystemAlertView shareInstance].yzAlert setValue:attStr forKey:@"attributedMessage"];
+    }else{
+        // need test
+        [(UIAlertView *)self.yzAlert setMessage:@""];
+        CGSize size = attStr.size;
+        CGFloat height = size.width / 50 * size.height;
+        UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, height)];
+        lbl.numberOfLines = 0;
+        lbl.attributedText = attStr;
+        lbl.textAlignment = NSTextAlignmentCenter;
+        [(UIAlertView *)self.yzAlert setValue:lbl forKey:@"accessoryView"];
     }
 }
 
@@ -538,9 +550,11 @@ static const char SSSystemAlertView_ClassMethodActionBlockIdentify;
         title = @"取消";
     if (IOS8Later) {
         UIAlertAction *alertAction = [UIAlertAction actionWithTitle:title style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            if (block) {
-                block(btnIndex - 1);
-            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (block) {
+                    block(btnIndex - 1);
+                }
+            });
         }];
         [(UIAlertController *)[SSSystemAlertView shareInstance].yzAlert addAction:alertAction];
     }else{

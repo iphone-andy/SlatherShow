@@ -46,6 +46,15 @@ typedef void (^AlertClickBlock)(id alert, NSInteger buttonIndex);//alert 在iOS8
 
 - (void)addButtonWithTitle:(NSString *)title handler:(void (^)(void))block;
 - (void)setCancelButtonWithTitle:(NSString *)title handler:(void (^)(void))block;
+
+#pragma mark - NSAttributedString title/message
+
+//title
+- (void)setAlertAttributedTitle:(NSAttributedString *)attStr;
+//message
+- (void)setAlertAttributedMessage:(NSAttributedString *)attStr;
+
+
 /**
  *  add textfield to alertview
  *
