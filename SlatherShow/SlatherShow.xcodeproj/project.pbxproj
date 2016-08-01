@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D3DA65341CE1BA6B00426BED /* SSBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DA65331CE1BA6B00426BED /* SSBaseView.m */; };
+		D3DA65341CE1BA6B00426BED /* SSBaseShow.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DA65331CE1BA6B00426BED /* SSBaseShow.m */; };
 		D3DA65371CE1BABF00426BED /* SSSystemAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DA65361CE1BABF00426BED /* SSSystemAlertView.m */; };
 		D3DA653A1CE1BAD600426BED /* SSSystemActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DA65391CE1BAD600426BED /* SSSystemActionSheet.m */; };
 		D3DA653D1CE1BAEF00426BED /* SSToastView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DA653C1CE1BAEF00426BED /* SSToastView.m */; };
@@ -44,8 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D3DA65321CE1BA6B00426BED /* SSBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSBaseView.h; sourceTree = "<group>"; };
-		D3DA65331CE1BA6B00426BED /* SSBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSBaseView.m; sourceTree = "<group>"; };
+		D3DA65321CE1BA6B00426BED /* SSBaseShow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSBaseShow.h; sourceTree = "<group>"; };
+		D3DA65331CE1BA6B00426BED /* SSBaseShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSBaseShow.m; sourceTree = "<group>"; };
 		D3DA65351CE1BABF00426BED /* SSSystemAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSSystemAlertView.h; sourceTree = "<group>"; };
 		D3DA65361CE1BABF00426BED /* SSSystemAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSSystemAlertView.m; sourceTree = "<group>"; };
 		D3DA65381CE1BAD600426BED /* SSSystemActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSSystemActionSheet.h; sourceTree = "<group>"; };
@@ -132,8 +132,8 @@
 				D3E193631CD8BF8C00A88A99 /* AppDelegate.m */,
 				D3E193651CD8BF8C00A88A99 /* ViewController.h */,
 				D3E193661CD8BF8C00A88A99 /* ViewController.m */,
-				D3DA65321CE1BA6B00426BED /* SSBaseView.h */,
-				D3DA65331CE1BA6B00426BED /* SSBaseView.m */,
+				D3DA65321CE1BA6B00426BED /* SSBaseShow.h */,
+				D3DA65331CE1BA6B00426BED /* SSBaseShow.m */,
 				D3DA65351CE1BABF00426BED /* SSSystemAlertView.h */,
 				D3DA65361CE1BABF00426BED /* SSSystemAlertView.m */,
 				D3DA65381CE1BAD600426BED /* SSSystemActionSheet.h */,
@@ -326,7 +326,7 @@
 				D3DA654C1CE1C66300426BED /* SlatherShow.m in Sources */,
 				D3E193611CD8BF8C00A88A99 /* main.m in Sources */,
 				D3DA65461CE1C60100426BED /* SSLoadingView.m in Sources */,
-				D3DA65341CE1BA6B00426BED /* SSBaseView.m in Sources */,
+				D3DA65341CE1BA6B00426BED /* SSBaseShow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

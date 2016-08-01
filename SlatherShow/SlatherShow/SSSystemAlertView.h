@@ -6,7 +6,7 @@
 //  Copyright © 2016年 邱灿清. All rights reserved.
 //
 
-#import "SSBaseView.h"
+#import "SSBaseShow.h"
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSUInteger, SSSystemAlertViewTextFieldStyle) {
@@ -16,7 +16,7 @@ typedef NS_ENUM(NSUInteger, SSSystemAlertViewTextFieldStyle) {
 };
 typedef void (^AlertClickBlock)(id alert, NSInteger buttonIndex);//alert 在iOS8以下为UIAlertView类型，iOS8以上为UIAlertController类型，调用者根据系统版本号自行判断
 
-@interface SSSystemAlertView : SSBaseView
+@interface SSSystemAlertView : SSBaseShow
 
 #pragma mark - shareInstance
 

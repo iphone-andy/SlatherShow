@@ -6,8 +6,8 @@
 //  Copyright © 2016年 邱灿清. All rights reserved.
 //
 
-#import "SSBaseView.h"
+#import "SSBaseShow.h"
 
-@interface SSLoadingView : SSBaseView
+@interface SSLoadingView : SSBaseShow
 
 @end

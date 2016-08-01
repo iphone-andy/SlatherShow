@@ -6,7 +6,7 @@
 //  Copyright © 2016年 邱灿清. All rights reserved.
 //
 
-#import "SSBaseView.h"
+#import "SSBaseShow.h"
 
 @implementation SSWindowController
 
@@ -52,7 +52,7 @@
 
 @end
 
-@implementation SSBaseView
+@implementation SSBaseShow
 
 - (void)show{
     NSAssert(NO, @"subclass should reload show method");

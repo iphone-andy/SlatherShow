@@ -15,7 +15,7 @@
 
 @end
 
-@interface SSBaseView : NSObject
+@interface SSBaseShow : NSObject
 
 - (void)show;
 

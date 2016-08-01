@@ -7,7 +7,7 @@
 //
 
 #import "UIKit/UIKit.h"
-#import "SSBaseView.h"
+#import "SSBaseShow.h"
 
 @class SSCustomAlertView;
 
